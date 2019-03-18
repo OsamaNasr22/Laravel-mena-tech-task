@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware(['web'])->group(function (){
+    Route::prefix('admin')->group(function (){
+        Route::resources([
+            'companies'=> 'CompanyController',
+            'employees'=>'EmployeeController'
+        ]);
+        Auth::routes();
+    });
+});
+//Route::get('/home', 'HomeController@index')->name('home');
