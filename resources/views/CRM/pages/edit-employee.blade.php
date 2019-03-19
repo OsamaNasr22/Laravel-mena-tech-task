@@ -1,9 +1,6 @@
 @extends('CRM.layouts.master')
 @section('title') Edit Employee @endsection
 @section('content')
-    @extends('CRM.layouts.master')
-@section('title') Add Employee @endsection
-@section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
