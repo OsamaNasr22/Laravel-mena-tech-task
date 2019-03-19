@@ -11,26 +11,28 @@
         <!-- /.row -->
 
         <div class="row">
-            <form  action="#" method="post" enctype="multipart/form-data">
+            <form  action="{{route('companies.update',$company->id)}}" method="post" enctype="multipart/form-data">
                 {{--@csrf--}}
+                {{method_field('PUT')}}
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                 <label class="label label-success" for="company_name">Company Name</label>
                 <div class="form-group">
-                    <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Enter Company Name">
+                    <input type="text" id="company_name" name="company_name" value="{{$company->name}}" class="form-control" placeholder="Enter Company Name">
                 </div>
 
                 <label class="label label-success" for="company_email">Company Email</label>
                 <div class="form-group">
-                    <input type="email" id="company_email" name="company_email" class="form-control" placeholder="Enter Company Email">
+                    <input type="email" id="company_email" name="company_email" value="{{$company->email}}" class="form-control" placeholder="Enter Company Email">
                 </div>
                 <label class="label label-success" for="company_logo">Company Logo</label>
                 <div class="form-group">
                     <input type="file" id="company_logo" name="company_logo" class="form-control">
+                    <img src="{{asset('storage/company/'.$company->logo)}}" class="img-responsive" width="60" height="60">
                 </div>
                 <label class="label label-success" for="company_website">Company Website</label>
                 <div class="form-group">
-                    <input type="text" id="company_website" name="company_website" class="form-control" placeholder="Enter Company Website">
+                    <input type="text" id="company_website" name="company_website" value="{{$company->website}}" class="form-control" placeholder="Enter Company Website">
                 </div>
                 <a href="#" class="btn btn-success btn-block" style="display: inline-block;" id="submit">Save Changes</a>
 

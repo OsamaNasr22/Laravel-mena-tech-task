@@ -11,18 +11,18 @@
         <!-- /.row -->
 
         <div class="row">
-            <form  action="#" method="post" enctype="multipart/form-data">
+            <form  action="{{route('companies.store')}}" method="post" enctype="multipart/form-data">
                 {{--@csrf--}}
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                 <label class="label label-primary" for="company_name">Company Name</label>
                 <div class="form-group">
-                    <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Enter Company Name">
+                    <input type="text" id="company_name" name="company_name" class="form-control" value="{{old('company_name')}}" placeholder="Enter Company Name">
                 </div>
 
                 <label class="label label-primary" for="company_email">Company Email</label>
                 <div class="form-group">
-                    <input type="email" id="company_email" name="company_email" class="form-control" placeholder="Enter Company Email">
+                    <input type="email" id="company_email" name="company_email" class="form-control"  value="{{old('company_email')}}" placeholder="Enter Company Email">
                 </div>
                 <label class="label label-primary" for="company_logo">Company Logo</label>
                 <div class="form-group">
@@ -30,7 +30,7 @@
                 </div>
                 <label class="label label-primary" for="company_website">Company Website</label>
                 <div class="form-group">
-                    <input type="text" id="company_website" name="company_website" class="form-control" placeholder="Enter Company Website">
+                    <input type="text" id="company_website" name="company_website" class="form-control"  value="{{old('company_website')}}" placeholder="Enter Company Website">
                 </div>
                 <a href="#" class="btn btn-primary btn-block" style="display: inline-block;" id="submit">Add</a>
 

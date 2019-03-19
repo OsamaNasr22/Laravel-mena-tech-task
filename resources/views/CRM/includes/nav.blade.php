@@ -43,16 +43,16 @@
             <ul class="nav" id="side-menu">
 
                 <li>
-                    <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="{{route('dashboard')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Companies<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Add Company</a>
+                            <a href="{{route('companies.create')}}">Add Company</a>
                         </li>
                         <li>
-                            <a href="#">All Companies</a>
+                            <a href="{{route('companies.index')}}">All Companies</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -61,10 +61,10 @@
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Employees<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a  href="#">Add Employee</a>
+                            <a  href="{{route('employees.create')}}">Add Employee</a>
                         </li>
                         <li>
-                            <a href="#">All Employees</a>
+                            <a href="{{route('employees.index')}}">All Employees</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

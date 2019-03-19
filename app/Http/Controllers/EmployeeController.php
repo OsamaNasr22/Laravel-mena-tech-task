@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Employee;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees=Employee::paginate(10);
+        return view('CRM.pages.employees',compact('employees'));
     }
 
     /**
@@ -25,6 +32,8 @@ class EmployeeController extends Controller
     public function create()
     {
         //
+        $companies= Company::all();
+        return view('CRM.pages.add-employee',compact('companies'));
     }
 
     /**
@@ -36,6 +45,24 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+            'employee_first_name'=>'required|string|max:190',
+            'employee_last_name'=>'required|string|max:190',
+            'employee_email'=>'nullable|email|max:190',
+            'employee_phone'=>'nullable|numeric|digits:11',
+            'employee_company'=>'required|integer',
+        ]);
+
+
+        $company= Company::findOrFail($request['employee_company']);
+
+        $employee= new Employee();
+        $employee->first_name=$request['employee_first_name'];
+        $employee->last_name=$request['employee_last_name'];
+        $employee->email=$request['employee_email'];
+        $employee->phone=$request['employee_phone'];
+        return $company->employees()->save($employee)? redirect()->back()->with(['success'=>'Employee added successfully']):
+            redirect()->back()->with(['fail'=>'Whooops, Something Wrong please try again.']);
     }
 
     /**
@@ -58,6 +85,8 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         //
+        $companies=Company::all();
+        return view('CRM.pages.edit-employee',compact('employee','companies'));
     }
 
     /**
@@ -70,6 +99,22 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         //
+        //
+        $this->validate($request,[
+            'employee_first_name'=>'required|string|max:190',
+            'employee_last_name'=>'required|string|max:190',
+            'employee_email'=>'nullable|email|max:190',
+            'employee_phone'=>'nullable|numeric|digits:11',
+            'employee_company'=>'required|integer',
+        ]);
+
+        $employee->first_name=$request['employee_first_name'];
+        $employee->last_name=$request['employee_last_name'];
+        $employee->email=$request['employee_email'];
+        $employee->phone=$request['employee_phone'];
+        $employee->company_id=$request['employee_company'];
+        return $employee->update()? redirect()->back()->with(['success'=>'Employee updated successfully']):
+            redirect()->back()->with(['fail'=>'Whooops, Something Wrong please try again.']);
     }
 
     /**
@@ -81,5 +126,7 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         //
+        return $employee->delete()? redirect()->back()->with(['success'=>'Employee deleted successfully']):
+            redirect()->back()->with(['fail'=>'Whooops, Something Wrong please try again.']);
     }
 }

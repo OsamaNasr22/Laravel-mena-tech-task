@@ -10,13 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+//
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::middleware(['web'])->group(function (){
     Route::prefix('admin')->group(function (){
+        Route::get('/','DashboardController@index')->name('dashboard');
         Route::resources([
             'companies'=> 'CompanyController',
             'employees'=>'EmployeeController'

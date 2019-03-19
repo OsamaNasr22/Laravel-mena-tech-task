@@ -48,7 +48,7 @@ $(function() {
 
 
     $('.message').slideDown('slow',function () {
-        $(this).delay(7000).slideUp('slow');
+        $(this).delay(5000).slideUp('slow');
     })
     $('#submit').on('click',function (e) {
         e.preventDefault();
@@ -57,5 +57,13 @@ $(function() {
         el.attr('disabled','disabled');
         form.submit();
 
+    })
+
+    $('.delete').on('click',function (event) {
+        event.preventDefault();
+        var form= $(this).parent();
+        if(confirm('This Item will be deleted, Are you sure?')){
+            form.submit();
+        }
     })
 });
