@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Employee;
+use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -42,16 +43,10 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
         //
-        $this->validate($request,[
-            'employee_first_name'=>'required|string|max:190',
-            'employee_last_name'=>'required|string|max:190',
-            'employee_email'=>'nullable|email|max:190',
-            'employee_phone'=>'nullable|numeric|digits:11',
-            'employee_company'=>'required|integer',
-        ]);
+
 
 
         $company= Company::findOrFail($request['employee_company']);

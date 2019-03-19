@@ -16,6 +16,7 @@
 //});
 
 Route::middleware(['web'])->group(function (){
+    Route::redirect('/', '/admin');
     Route::prefix('admin')->group(function (){
         Route::get('/','DashboardController@index')->name('dashboard');
         Route::resources([

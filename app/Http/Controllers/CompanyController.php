@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Http\Requests\CompanyRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,15 +41,9 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
         //
-        $this->validate($request,[
-            'company_name'=>'required|string|max:190',
-            'company_logo'=>'nullable|image|mimes:jpg,png,jpeg|dimensions:min_width=100,min_height=100',
-            'company_email'=>'nullable|email|max:190',
-            'company_website'=>'nullable|url|max:250'
-        ]);
         $company= new Company();
         $company->name=$request['company_name'];
         $company->email=$request['company_email'];
