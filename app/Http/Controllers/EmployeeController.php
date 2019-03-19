@@ -103,11 +103,13 @@ class EmployeeController extends Controller
             'employee_company'=>'required|integer',
         ]);
 
+        $company= Company::findOrFail($request['employee_company']);
+
         $employee->first_name=$request['employee_first_name'];
         $employee->last_name=$request['employee_last_name'];
         $employee->email=$request['employee_email'];
         $employee->phone=$request['employee_phone'];
-        $employee->company_id=$request['employee_company'];
+        $employee->company()->associate($company);
         return $employee->update()? redirect()->back()->with(['success'=>'Employee updated successfully']):
             redirect()->back()->with(['fail'=>'Whooops, Something Wrong please try again.']);
     }
